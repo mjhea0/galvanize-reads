@@ -1,15 +1,28 @@
-{% extends 'layout.html' %}
+{% extends '_layout.html' %}
 
 {% block title %}{% endblock %}
 
 
 {% block content %}
 
-  <div class="container">
-
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
-
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="page-header">Galvanize Reads</h1>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-6 portfolio-item">
+      <a href="#">
+        <img class="img-responsive" src="http://placehold.it/700x400?text=Books">
+      </a>
+    </div>
+    <div class="col-md-6 portfolio-item">
+      <a href="#">
+        <img class="img-responsive" src="http://placehold.it/700x400?text=Authors">
+      </a>
+    </div>
+  </div>
+
 
 {% endblock %}
