@@ -1,5 +1,5 @@
 Title,Task,Task Status,Task,Task Status,Task,Task Status,Task,Task Status,Task,Task Status,Task,Task Status
-"As a user, I need to be able to identify the company",Add a header,x,Find an appropriate logo,x,Add the logo,x,,,,,,,,
+"As a user, I need to be able to identify the company",Add a header,x,Find an appropriate logo,x,Add the logo,x,,,,,,
 "As a user, I need to be able to list all the books",Set up a local express server,x,Store some sample books data,x,Retrieve the books data from the express server,x,Create a view for the books data,x,Deliver the data to the view,x,Deliver the view with the data to the user,not completed
 "As an admin, I need to be able to add a book",Create a view for adding books,not completed,Validate user input in the view,not completed,Link to the add book view from the books list,not completed,Create an express route for adding books,not completed,Validate user input in the route,not completed,,
 "As an admin, I need to be able to delete an existing book",Create a view for deleting books,not completed,Create a link to the delete view from the books list,not completed,Create a route for deleting books,not completed,,,,,,
