@@ -9,12 +9,13 @@ var swig = require('swig');
 var session = require('express-session');
 var flash = require('connect-flash');
 
-var passport = require('./lib/auth');
+var passport = require('./auth/index');
 
 
 // *** routes *** //
 var routes = require('./routes/index');
 var authRoutes = require('./routes/auth');
+var bookRoutes = require('./routes/books');
 
 
 // *** express instance *** //
@@ -50,6 +51,7 @@ app.use(passport.session());
 // *** main routes *** //
 app.use('/', routes);
 app.use('/auth/', authRoutes);
+app.use('/books/', bookRoutes);
 
 
 // catch 404 and forward to error handler

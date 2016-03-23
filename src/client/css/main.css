@@ -10,3 +10,7 @@ a {
 .portfolio-item {
   margin-bottom: 25px;
 }
+
+.book-image {
+  max-width: 300px;
+}

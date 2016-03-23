@@ -1,10 +1,9 @@
-
 var express = require('express');
 var router = express.Router();
 
 var knex = require('../db/knex');
-var passport = require('../lib/auth');
-var helpers = require('../lib/helpers');
+var passport = require('../auth/index');
+var helpers = require('../auth/helpers');
 
 router.get('/login', helpers.loginRedirect, function(req, res, next) {
   res.render('login', { message: req.flash('message') });
