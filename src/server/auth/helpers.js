@@ -4,16 +4,25 @@ function ensureAuthenticated(req, res, next) {
   if(req.user) {
     return next();
   } else {
+    req.flash('message', {
+      status: 'danger',
+      value: 'Please login.'
+    });
     return res.redirect('/auth/login');
   }
 }
 
 function ensureAdmin(req, res, next) {
-  if(req.user.admin) {
-    return next();
-  } else {
-    return res.redirect('/auth/login');
+  if (req.user) {
+    if(req.user.admin) {
+      return next();
+    }
   }
+  req.flash('message', {
+    status: 'danger',
+    value: 'You do not have permission to view that page.'
+  });
+  return res.redirect('/');
 }
 
 

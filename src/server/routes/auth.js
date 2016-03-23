@@ -2,17 +2,23 @@ var express = require('express');
 var router = express.Router();
 
 var knex = require('../db/knex');
+var queries = require('../db/queries');
 var passport = require('../auth/index');
 var helpers = require('../auth/helpers');
 
+
 router.get('/login', helpers.loginRedirect, function(req, res, next) {
-  res.render('login', { message: req.flash('message') });
+  res.render('./auth/login', { message: req.flash('message') });
 });
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user) {
     if (err) {
-      return next(err);
+      req.flash('message', {
+        status: 'danger',
+        value: 'Incorrect email and/or password.'
+      });
+      return res.redirect('/auth/login');
     } else {
       req.logIn(user, function(err) {
         if (err) {
@@ -30,7 +36,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/register', helpers.loginRedirect, function(req, res, next) {
-  res.render('register', { message: req.flash('message') });
+  res.render('./auth/register', { message: req.flash('message') });
 });
 
 router.post('/register', function(req, res, next) {
@@ -83,6 +89,23 @@ router.get('/logout', helpers.ensureAuthenticated, function(req, res, next) {
   });
   res.redirect('/');
 });
+
+if (process.env.NODE_ENV === 'development') {
+  router.get('/make-admin', helpers.ensureAuthenticated,
+    function(req, res, next) {
+    queries.makeAdmin(req.user.id)
+    .then(function(books){
+      req.flash('message', {
+        status: 'success',
+        value: 'You are now an admin!'
+      });
+      res.redirect('/');
+    })
+    .catch(function(err){
+      return next(err);
+    });
+  });
+}
 
 
 module.exports = router;

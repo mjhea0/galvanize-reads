@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.string('title').notNullable();
     table.string('genre').notNullable();
     table.text('description').notNullable();
-    table.text('cover_url');
+    table.text('cover_url').notNullable();
   });
 };
 
