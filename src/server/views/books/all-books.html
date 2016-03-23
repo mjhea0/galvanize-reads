@@ -22,6 +22,12 @@
             <h3>{{ book.title }}</h3>
             <h4>{{ book.genre }}</h4>
             <p>{{ book.description }}</p>
+            {% if user.admin %}
+              <div class="btn-group-lg" role="group">
+                <button type="button" class="btn btn-success">Edit</button>
+                <button type="button" class="btn btn-danger">Remove</button>
+              </div>
+            {% endif %}
           </div>
         </div>
         <br><br>

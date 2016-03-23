@@ -9,7 +9,7 @@ var helpers = require('../auth/helpers');
 router.get('/', function(req, res, next) {
   queries.getBooks()
   .then(function(books){
-    res.render('./books/books', {
+    res.render('./books/all-books', {
       user: req.user,
       books: books
     });
