@@ -6,10 +6,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var swig = require('swig');
+var session = require('express-session');
+var flash = require('connect-flash');
+
+var passport = require('./lib/auth');
 
 
 // *** routes *** //
-var routes = require('./routes/index.js');
+var routes = require('./routes/index');
+var authRoutes = require('./routes/auth');
 
 
 // *** express instance *** //
@@ -32,10 +37,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
+app.use(session({
+  secret: process.env.SECRET_KEY || 'change_me',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // *** main routes *** //
 app.use('/', routes);
+app.use('/auth/', authRoutes);
 
 
 // catch 404 and forward to error handler
