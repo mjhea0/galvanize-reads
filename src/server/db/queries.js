@@ -34,6 +34,12 @@ function getAuthors() {
   return knex('authors').select();
 }
 
+function getSingleAuthor(authorID) {
+  return knex('authors')
+    .select()
+    .where('id', authorID);
+}
+
 function addAuthor(obj) {
   return knex('authors').insert(obj);
 }
@@ -53,6 +59,7 @@ module.exports = {
   updateBook: updateBook,
   deleteBook: deleteBook,
   getAuthors: getAuthors,
+  getSingleAuthor: getSingleAuthor,
   addAuthor: addAuthor,
   makeAdmin: makeAdmin
 };

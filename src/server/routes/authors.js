@@ -27,6 +27,21 @@ router.get('/', function(req, res, next) {
   });
 });
 
+// get SINGLE author
+router.get('/:id', function(req, res, next) {
+  queries.getSingleAuthor(parseInt(req.params.id))
+  .then(function(author){
+    res.render('./authors/single-author', {
+      user: req.user,
+      messages: req.flash('messages'),
+      author: author[0]
+    });
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
 // add new author
 router.post('/', helpers.ensureAdmin, function(req, res, next) {
   queries.addAuthor(req.body)

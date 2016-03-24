@@ -10,7 +10,7 @@ Title,Task,Complete,Task,Complete,Task,Complete,Task,Complete,Task,Complete,Task
 "As an admin, I need to be able to add an author",Create an add author view,x,Validate user input in the view,x,Create an add author route,x,Validate user input in the route,No,,,,
 As an admin I need to be able to delete an existing author,Create delete author view,No,Create delete author route,No,,,,,,,,
 "As an admin, I need to be able to edit existing authors",Create an edit author view,No,Validate user input on the view,No,Create an edit author route,No,Validate user input on the route,No,,,,
-"As a user, I need to be able to link to a specific author",Create a view for a single author,No,Create a route for a single author,No,,,,,,,,
+"As a user, I need to be able to link to a specific author",Create a view for a single author,x,Create a route for a single author,x,,,,,,,,
 "As a user, I need to be able to link to an author from a book.",Add links to single author views from the books list,No,Add links to single author views from individual books,No,Add links to single author views from delete books views,No,,,,,,
 "As a user, I need to be able to link to a book from an author",Add links to single book views from authors list,No,Add links to single book views from single author view,No,Add links to single book views from delete author view,No,,,,,,
 "As a user, I need to be able to filter books by genre",Add a drop down for genres to the books list,No,"When a value is selected from the list, only show books from that genre",No,,,,,,,,
