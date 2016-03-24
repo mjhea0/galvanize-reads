@@ -14,3 +14,7 @@ a {
 .book-image {
   max-width: 300px;
 }
+
+.author-image {
+  max-width: 150px;
+}

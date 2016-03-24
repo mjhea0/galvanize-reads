@@ -28,6 +28,12 @@ function deleteBook(bookID) {
     .where('id', bookID);
 }
 
+// *** authors *** //
+
+function getAuthors() {
+  return knex('authors').select();
+}
+
 // *** helpers *** //
 
 function makeAdmin(userID) {
@@ -42,5 +48,6 @@ module.exports = {
   addBook: addBook,
   updateBook: updateBook,
   deleteBook: deleteBook,
+  getAuthors: getAuthors,
   makeAdmin: makeAdmin
 };

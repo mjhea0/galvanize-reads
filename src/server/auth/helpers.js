@@ -4,7 +4,7 @@ function ensureAuthenticated(req, res, next) {
   if(req.user) {
     return next();
   } else {
-    req.flash('message', {
+    req.flash('messages', {
       status: 'danger',
       value: 'Please login.'
     });
@@ -18,7 +18,7 @@ function ensureAdmin(req, res, next) {
       return next();
     }
   }
-  req.flash('message', {
+  req.flash('messages', {
     status: 'danger',
     value: 'You do not have permission to view that page.'
   });

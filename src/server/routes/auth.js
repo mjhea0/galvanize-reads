@@ -8,13 +8,13 @@ var helpers = require('../auth/helpers');
 
 
 router.get('/login', helpers.loginRedirect, function(req, res, next) {
-  res.render('./auth/login', { message: req.flash('message') });
+  res.render('./auth/login', { messages: req.flash('messages') });
 });
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user) {
     if (err) {
-      req.flash('message', {
+      req.flash('messages', {
         status: 'danger',
         value: 'Incorrect email and/or password.'
       });
@@ -24,7 +24,7 @@ router.post('/login', function(req, res, next) {
         if (err) {
           return next(err);
         } else {
-          req.flash('message', {
+          req.flash('messages', {
             status: 'success',
             value: 'Welcome!'
           });
@@ -36,7 +36,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/register', helpers.loginRedirect, function(req, res, next) {
-  res.render('./auth/register', { message: req.flash('message') });
+  res.render('./auth/register', { messages: req.flash('messages') });
 });
 
 router.post('/register', function(req, res, next) {
@@ -45,7 +45,7 @@ router.post('/register', function(req, res, next) {
   knex('users').where('email', email)
     .then(function(data){
       if(data.length) {
-          req.flash('message', {
+          req.flash('messages', {
             status: 'danger',
             value: 'Email already exists.!'
           });
@@ -63,7 +63,7 @@ router.post('/register', function(req, res, next) {
             if (err) {
               return next(err);
             } else {
-              req.flash('message', {
+              req.flash('messages', {
                 status: 'success',
                 value: 'Welcome!'
               });
@@ -83,7 +83,7 @@ router.post('/register', function(req, res, next) {
 
 router.get('/logout', helpers.ensureAuthenticated, function(req, res, next) {
   req.logout();
-  req.flash('message', {
+  req.flash('messages', {
     status: 'success',
     value: 'Goodbye!'
   });
@@ -95,7 +95,7 @@ if (process.env.NODE_ENV === 'development') {
     function(req, res, next) {
     queries.makeAdmin(req.user.id)
     .then(function(books){
-      req.flash('message', {
+      req.flash('messages', {
         status: 'success',
         value: 'You are now an admin!'
       });

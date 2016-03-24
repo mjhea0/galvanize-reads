@@ -8,7 +8,7 @@ var helpers = require('../auth/helpers');
 router.get('/new', helpers.ensureAdmin, function(req, res, next) {
   res.render('./books/add-book', {
     user: req.user,
-    message: req.flash('message')
+    messages: req.flash('messages')
   });
 });
 
@@ -17,7 +17,7 @@ router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
   .then(function(book){
     res.render('./books/edit-book', {
       user: req.user,
-      message: req.flash('message'),
+      messages: req.flash('messages'),
       book: book[0]
     });
   })
@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
   .then(function(books){
     res.render('./books/all-books', {
       user: req.user,
-      message: req.flash('message'),
+      messages: req.flash('messages'),
       books: books
     });
   })
@@ -47,7 +47,7 @@ router.get('/:id', function(req, res, next) {
   .then(function(book){
     res.render('./books/single-book', {
       user: req.user,
-      message: req.flash('message'),
+      messages: req.flash('messages'),
       book: book[0]
     });
   })
@@ -60,7 +60,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/', helpers.ensureAdmin, function(req, res, next) {
   queries.addBook(req.body)
   .then(function(book){
-    req.flash('message', {
+    req.flash('messages', {
       status: 'success',
       value: 'Book added!'
     });
@@ -75,7 +75,7 @@ router.post('/', helpers.ensureAdmin, function(req, res, next) {
 router.post('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
   queries.updateBook(parseInt(req.params.id), req.body)
   .then(function(book){
-    req.flash('message', {
+    req.flash('messages', {
       status: 'success',
       value: 'Book updated!'
     });

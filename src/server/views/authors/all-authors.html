@@ -1,0 +1,40 @@
+{% extends '../_layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  {% include '../partials/authors-header.html' %}
+
+  <br><br>
+
+  <div class="row">
+    <div class="col-sm-12">
+      {% if authors.length %}
+        {% for author in authors %}
+          <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+              <img class="img-responsive author-image" src="{{ author.portrait_url }}">
+            </div>
+            <div class="col-md-6">
+              <h3><a href="/authors/{{ author.id }}">{{ author.first_name }}&nbsp;{{ author.last_name }}</a></h3>
+              <h4>{{ author.genre }}</h4>
+              <p>{{ author.biography }}</p>
+              {% if user.admin %}
+                <div class="btn-group-lg" role="group">
+                  <a class="btn btn-success" href="/authors/{{ author.id }}/edit" role="button">Edit</a>
+                  <button type="button" data-author-id="{{ author.id }}" class="btn btn-danger" id="remove-author">Remove</button>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <br><br>
+        {% endfor %}
+      {% else %}
+        <h3>No Authors!</h3>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}
