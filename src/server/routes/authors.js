@@ -5,6 +5,13 @@ var queries = require('../db/queries');
 var helpers = require('../auth/helpers');
 
 
+router.get('/new', helpers.ensureAdmin, function(req, res, next) {
+  res.render('./authors/add-author', {
+    user: req.user,
+    messages: req.flash('messages')
+  });
+});
+
 // get ALL authors
 router.get('/', function(req, res, next) {
   queries.getAuthors()
@@ -14,6 +21,21 @@ router.get('/', function(req, res, next) {
       messages: req.flash('messages'),
       authors: authors
     });
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
+// add new author
+router.post('/', helpers.ensureAdmin, function(req, res, next) {
+  queries.addAuthor(req.body)
+  .then(function(author){
+    req.flash('messages', {
+      status: 'success',
+      value: 'Author added!'
+    });
+    res.redirect('/authors/new');
   })
   .catch(function(err){
     return next(err);
