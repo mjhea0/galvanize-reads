@@ -6,6 +6,12 @@ function getBooks() {
   return knex('books').select();
 }
 
+function getSingleBook(bookID) {
+  return knex('books')
+    .select()
+    .where('id', bookID);
+}
+
 function addBook(obj) {
   return knex('books').insert(obj);
 }
@@ -20,6 +26,7 @@ function makeAdmin(userID) {
 
 module.exports = {
   getBooks: getBooks,
+  getSingleBook: getSingleBook,
   addBook: addBook,
   makeAdmin: makeAdmin
 };

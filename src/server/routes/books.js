@@ -19,6 +19,20 @@ router.get('/', function(req, res, next) {
   });
 });
 
+// get SINGLE book
+router.get('/:id', function(req, res, next) {
+  queries.getSingleBook(parseInt(req.params.id))
+  .then(function(book){
+    res.render('./books/single-book', {
+      user: req.user,
+      book: book[0]
+    });
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
 // add new book
 router.post('/', function(req, res, next) {
   queries.addBook(req.body)
