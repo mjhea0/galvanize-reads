@@ -23,8 +23,8 @@
           <p>{{ book.description }}</p>
           {% if user.admin %}
             <div class="btn-group-lg" role="group">
-              <button type="button" class="btn btn-success">Edit</button>
-              <button type="button" class="btn btn-danger">Remove</button>
+              <a class="btn btn-success" href="#" role="button">Edit</a>
+              <button type="button" data-book-id="{{ book.id }}" class="btn btn-danger" id="single-remove-book">Remove</button>
             </div>
           {% endif %}
         </div>

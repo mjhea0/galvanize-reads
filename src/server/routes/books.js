@@ -5,6 +5,13 @@ var queries = require('../db/queries');
 var helpers = require('../auth/helpers');
 
 
+router.get('/new', helpers.ensureAdmin, function(req, res, next) {
+  res.render('./books/add-book', {
+    user: req.user,
+    message: req.flash('message')
+  });
+});
+
 // get ALL books
 router.get('/', function(req, res, next) {
   queries.getBooks()
@@ -34,7 +41,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 // add new book
-router.post('/', function(req, res, next) {
+router.post('/', helpers.ensureAdmin, function(req, res, next) {
   queries.addBook(req.body)
   .then(function(book){
     req.flash('message', {
@@ -48,11 +55,14 @@ router.post('/', function(req, res, next) {
   });
 });
 
-
-router.get('/new', helpers.ensureAdmin, function(req, res, next) {
-  res.render('./books/add-book', {
-    user: req.user,
-    message: req.flash('message')
+// remove book
+router.delete('/:id', helpers.ensureAdmin, function(req, res, next) {
+  queries.deleteBook(parseInt(req.params.id))
+  .then(function(book){
+    res.status(200).json({ status: 'success' });
+  })
+  .catch(function(err){
+    res.status(500).json({ status: 'error' });
   });
 });
 
