@@ -1,7 +1,6 @@
 // add scripts
 
 $(document).on('click', '#remove-book', function(){
-  console.log('test')
   var bookID = $(this).attr('data-book-id');
   bootbox.confirm('Are you sure?', function(result) {
     if(result) {

@@ -12,12 +12,27 @@ router.get('/new', helpers.ensureAdmin, function(req, res, next) {
   });
 });
 
+router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
+  queries.getSingleBook(parseInt(req.params.id))
+  .then(function(book){
+    res.render('./books/edit-book', {
+      user: req.user,
+      message: req.flash('message'),
+      book: book[0]
+    });
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
 // get ALL books
 router.get('/', function(req, res, next) {
   queries.getBooks()
   .then(function(books){
     res.render('./books/all-books', {
       user: req.user,
+      message: req.flash('message'),
       books: books
     });
   })
@@ -32,6 +47,7 @@ router.get('/:id', function(req, res, next) {
   .then(function(book){
     res.render('./books/single-book', {
       user: req.user,
+      message: req.flash('message'),
       book: book[0]
     });
   })
@@ -48,12 +64,28 @@ router.post('/', helpers.ensureAdmin, function(req, res, next) {
       status: 'success',
       value: 'Book added!'
     });
-    return res.redirect('/books/new');
+    res.redirect('/books/new');
   })
   .catch(function(err){
     return next(err);
   });
 });
+
+// update book
+router.post('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
+  queries.updateBook(parseInt(req.params.id), req.body)
+  .then(function(book){
+    req.flash('message', {
+      status: 'success',
+      value: 'Book updated!'
+    });
+    res.redirect('/books/' + req.params.id + '/edit');
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
 
 // remove book
 router.delete('/:id', helpers.ensureAdmin, function(req, res, next) {

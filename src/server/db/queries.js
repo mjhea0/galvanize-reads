@@ -16,6 +16,12 @@ function addBook(obj) {
   return knex('books').insert(obj);
 }
 
+function updateBook(bookID, obj) {
+  return knex('books')
+    .update(obj)
+    .where('id', bookID);
+}
+
 function deleteBook(bookID) {
   return knex('books')
     .del()
@@ -34,6 +40,7 @@ module.exports = {
   getBooks: getBooks,
   getSingleBook: getSingleBook,
   addBook: addBook,
+  updateBook: updateBook,
   deleteBook: deleteBook,
   makeAdmin: makeAdmin
 };

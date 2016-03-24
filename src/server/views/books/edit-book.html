@@ -1,0 +1,39 @@
+{% extends '../_layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  {% include '../partials/books-header.html' %}
+
+  <br><br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Edit Book</h2>
+      <br>
+      <form action="/books/{{ book.id }}/edit" method="post">
+        <div class="form-group">
+          <label for="edit-title">Title</label>
+          <input type="text" name="title" class="form-control" id="edit-title" value="{{ book.title }}" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="edit-genre">Genre</label>
+          <input type="text" name="genre" class="form-control" id="edit-genre"value="{{ book.genre }}" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-cover-url">Cover Image URL</label>
+          <input type="url" name="cover_url" class="form-control" id="edit-cover-url"value="{{ book.cover_url }}" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-description">Description</label>
+          <textarea class="form-control" name="description" rows="5" id="edit-description"required>{{ book.description }}</textarea>
+        </div>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update Book</button>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

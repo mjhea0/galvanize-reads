@@ -13,9 +13,7 @@
     <div class="col-sm-12">
       <div class="row">
         <div class="col-md-4 col-md-offset-1">
-        <a href="#">
           <img class="img-responsive book-image" src="{{ book.cover_url }}">
-        </a>
         </div>
         <div class="col-md-6">
           <h3>{{ book.title }}</h3>
@@ -23,7 +21,7 @@
           <p>{{ book.description }}</p>
           {% if user.admin %}
             <div class="btn-group-lg" role="group">
-              <a class="btn btn-success" href="#" role="button">Edit</a>
+              <a class="btn btn-success" href="/books/{{ book.id }}/edit" role="button">Edit</a>
               <button type="button" data-book-id="{{ book.id }}" class="btn btn-danger" id="single-remove-book">Remove</button>
             </div>
           {% endif %}
