@@ -3,7 +3,8 @@ var knex = require('./knex');
 // *** books *** //
 
 function getBooks() {
-  return knex('books').select();
+  return knex('books')
+    .select();
 }
 
 function getSingleBook(bookID) {
@@ -13,7 +14,8 @@ function getSingleBook(bookID) {
 }
 
 function addBook(obj) {
-  return knex('books').insert(obj);
+  return knex('books')
+    .insert(obj);
 }
 
 function updateBook(bookID, obj) {
@@ -31,7 +33,8 @@ function deleteBook(bookID) {
 // *** authors *** //
 
 function getAuthors() {
-  return knex('authors').select();
+  return knex('authors')
+    .select();
 }
 
 function getSingleAuthor(authorID) {
@@ -41,7 +44,8 @@ function getSingleAuthor(authorID) {
 }
 
 function addAuthor(obj) {
-  return knex('authors').insert(obj);
+  return knex('authors')
+    .insert(obj);
 }
 
 function updateAuthor(authorID, obj) {

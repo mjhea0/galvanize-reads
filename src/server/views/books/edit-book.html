@@ -13,14 +13,15 @@
     <div class="col-md-6">
       <h2>Edit Book</h2>
       <br>
+      <h3>{{ book.title }}</h3>
+      <br>
       <form action="/books/{{ book.id }}/edit" method="post">
         <div class="form-group">
-          <label for="edit-title">Title</label>
-          <input type="text" name="title" class="form-control" id="edit-title" value="{{ book.title }}" required autofocus>
+          <input type="hidden" name="title" class="form-control" id="edit-title" value="{{ book.title }}" required>
         </div>
         <div class="form-group">
           <label for="edit-genre">Genre</label>
-          <input type="text" name="genre" class="form-control" id="edit-genre"value="{{ book.genre }}" required>
+          <input type="text" name="genre" class="form-control" id="edit-genre"value="{{ book.genre }}" required autofocus>
         </div>
         <div class="form-group">
           <label for="edit-cover-url">Cover Image URL</label>

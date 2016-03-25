@@ -19,6 +19,10 @@
           <h3>{{ author.first_name }}&nbsp;{{ author.last_name }}</h3>
           <h4>{{ author.genre }}</h4>
           <p>{{ author.biography }}</p>
+          <p><strong>Bibliography:</strong></p>
+          <ol>
+            <li><a href="/books/{{ author.book_id }}">{{ author.book_title }}</a></li>
+          </ol>
           {% if user.admin %}
             <div class="btn-group-lg" role="group">
               <a class="btn btn-success" href="/authors/{{ author.id }}/edit" role="button">Edit</a>
