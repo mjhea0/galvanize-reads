@@ -86,7 +86,6 @@ router.post('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
   });
 });
 
-
 // remove book
 router.delete('/:id', helpers.ensureAdmin, function(req, res, next) {
   queries.deleteBook(parseInt(req.params.id))

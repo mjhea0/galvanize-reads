@@ -12,6 +12,20 @@ router.get('/new', helpers.ensureAdmin, function(req, res, next) {
   });
 });
 
+router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
+  queries.getSingleAuthor(parseInt(req.params.id))
+  .then(function(author){
+    res.render('./authors/edit-author', {
+      user: req.user,
+      messages: req.flash('messages'),
+      author: author[0]
+    });
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
 // get ALL authors
 router.get('/', function(req, res, next) {
   queries.getAuthors()
@@ -51,6 +65,21 @@ router.post('/', helpers.ensureAdmin, function(req, res, next) {
       value: 'Author added!'
     });
     res.redirect('/authors/new');
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
+// update author
+router.post('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
+  queries.updateAuthor(parseInt(req.params.id), req.body)
+  .then(function(author){
+    req.flash('messages', {
+      status: 'success',
+      value: 'Author updated!'
+    });
+    res.redirect('/authors/' + req.params.id + '/edit');
   })
   .catch(function(err){
     return next(err);

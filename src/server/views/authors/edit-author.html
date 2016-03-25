@@ -1,0 +1,39 @@
+{% extends '../_layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  {% include '../partials/authors-header.html' %}
+
+  <br><br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Edit Author</h2>
+      <br>
+      <form action="/authors/{{ author.id }}/edit" method="post">
+        <div class="form-group">
+          <label for="edit-first-name">First name</label>
+          <input type="text" name="first_name" class="form-control" id="edit-first-name" value="{{ author.first_name }}" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="edit-last-name">Last Name</label>
+          <input type="text" name="last_name" class="form-control" id="edit-last-name"value="{{ author.last_name }}" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-portrait-url">Portrait Image URL</label>
+          <input type="url" name="portrait_url" class="form-control" id="edit-portrait-url"value="{{ author.portrait_url }}" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-biography">Biography</label>
+          <textarea class="form-control" name="biography" rows="5" id="edit-biography"required>{{ author.biography }}</textarea>
+        </div>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update Author</button>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
