@@ -8,7 +8,7 @@ Title,Task,Complete,Task,Complete,Task,Complete,Task,Complete,Task,Complete,Task
 "As a user, I need to be able to list all the authors",Update the data model to include authors,x,Add some seed author data,x,Create an authors list view,x,Create an authors list route,x,,,,
 "As a user, I need to be able to easily navigate between books and authors",Add an index page that links to the books list and authors list pages,x,Add a side navigation that's visible from the books list and authors list pages,x,,,,,,,,
 "As an admin, I need to be able to add an author",Create an add author view,x,Validate user input in the view,x,Create an add author route,x,Validate user input in the route,No,,,,
-As an admin I need to be able to delete an existing author,Create delete author view,No,Create delete author route,No,,,,,,,,
+As an admin I need to be able to delete an existing author,Create delete author view,No,Create delete author route,x,,,,,,,,
 "As an admin, I need to be able to edit existing authors",Create an edit author view,No,Validate user input on the view,No,Create an edit author route,No,Validate user input on the route,No,,,,
 "As a user, I need to be able to link to a specific author",Create a view for a single author,x,Create a route for a single author,x,,,,,,,,
 "As a user, I need to be able to link to an author from a book.",Add links to single author views from the books list,No,Add links to single author views from individual books,No,Add links to single author views from delete books views,No,,,,,,

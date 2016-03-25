@@ -57,5 +57,16 @@ router.post('/', helpers.ensureAdmin, function(req, res, next) {
   });
 });
 
+// remove author
+router.delete('/:id', helpers.ensureAdmin, function(req, res, next) {
+  queries.deleteAuthor(parseInt(req.params.id))
+  .then(function(author){
+    res.status(200).json({ status: 'success' });
+  })
+  .catch(function(err){
+    res.status(500).json({ status: 'error' });
+  });
+});
+
 
 module.exports = router;
