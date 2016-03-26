@@ -1,10 +1,30 @@
+var genreList = genres.split(','); // from swig template
+
+// fuzzy search for books
+$('#search-books').on('keyup', function() {
+  $('.book').hide();
+  var term = $.trim($(this).val());
+  var applicableGenreList = searchIn(term, genreList);
+  applicableGenreList.forEach(function(genre){
+    $('.book').filter(function() {
+      return $(this).data('book-genre') === genre;
+    }).show();
+  });
+});
+
+function searchIn(query, list) {
+  return list.filter(function(el) {
+    return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+  });
+}
+
 // filter books by genre
 $(document).on('click', '#genre', function(){
   var genre = $.trim($(this).text());
-  $('.book').filter(function(){
+  $('.book').filter(function() {
     return $(this).data('book-genre') === genre;
   }).show();
-  $('.book').filter(function(){
+  $('.book').filter(function() {
     return $(this).data('book-genre') !== genre;
   }).hide();
   $('.remove-filter').show();

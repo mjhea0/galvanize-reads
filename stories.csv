@@ -16,7 +16,7 @@ As an admin I need to be able to delete an existing author,Create delete author 
 "As a user, I need to be able to filter books by genre",Add a drop down for genres to the books list,x,"When a value is selected from the list, only show books from that genre",x,,,,,,,,
 "As a user, I need to limit the number of book results I receive at a time",Limit the display on the books list page to 10 books per page,No,Link another page if there are more than 10,No,Link to a previous page if there are fewer than 10,No,,,,,,
 "As a user, I need to limit the number of authors I receive at a time",Limit the display on the authors page to 10 authors per page,No,Link to another page if there are more than 10 authors,No,Link to a previous page if there are fewer than 10 authors,No,,,,,,
-"As a user, I need to search for books",Add a field to the books list page to enter a search term for a book,No,Add the ability to search for a record to the books list route,No,,,,,,,,
+"As a user, I need to search for books",Add a field to the books list page to enter a search term for a book,x,Add the ability to search for a record to the books list route,No,,,,,,,,
 "As a user, I need to be able to search for authors",Add a field to the authors list page to enter a search term for an author,No,Add the ability to search for a record to the authors route,No,,,,,,,,
 "As a user, I need to be able to search for books and authors",Add the ability to enter a search term on the index page for authors or books,No,Add a route that can do a general search between books and authors,No,Add a view that displays the results of the search,No,,,,,,
 "As a user, I need to be able see the total number of books","On the books list page, display the total number of books in the database",x,,,,,,,,,,

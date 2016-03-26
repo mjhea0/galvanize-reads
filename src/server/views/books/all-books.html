@@ -5,6 +5,10 @@
 
 {% block content %}
 
+  <script>
+   var genres = "{{ genres }}";
+  </script>
+
   {% include '../partials/books-header.html' %}
 
   <br><br>
@@ -23,6 +27,13 @@
           {% endfor %}
           </ul>
         </div>
+        <br>
+        <h2>Search:</h2>
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="search-books" placeholder="Search">
+          </div>
+        </form>
         <br><br>
         <button class="btn btn-default remove-filter" id="remove-filter">Remove Filter</button>
       {% else %}
