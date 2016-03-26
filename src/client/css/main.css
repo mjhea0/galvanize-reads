@@ -18,3 +18,7 @@ a {
 .author-image {
   max-width: 150px;
 }
+
+.genre {
+  cursor: pointer;
+}

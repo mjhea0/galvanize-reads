@@ -1,6 +1,16 @@
-// add scripts
+$(document).on('click', '#genre', function(){
+  var genre = $.trim($(this).text());
+  $('.book').filter(function(){
+    return $(this).data('book-genre') === genre;
+  }).show();
+  $('.book').filter(function(){
+    return $(this).data('book-genre') !== genre;
+  }).hide();
+});
 
-$(document).on('click', '#remove-book', function(){
+
+// remove book from all books view
+$(document).on('click', '.remove-book', function(){
   var bookID = $(this).attr('data-book-id');
   bootbox.confirm('Are you sure?', function(result) {
     if(result) {
@@ -18,6 +28,7 @@ $(document).on('click', '#remove-book', function(){
   });
 });
 
+// remove book from single book view
 $('#single-remove-book').on('click', function(){
   var bookID = $(this).attr('data-book-id');
   bootbox.confirm('Are you sure?', function(result) {
@@ -36,7 +47,8 @@ $('#single-remove-book').on('click', function(){
   });
 });
 
-$(document).on('click', '#remove-author', function(){
+// remove author from all authors view
+$(document).on('click', '.remove-author', function(){
   var authorID = $(this).attr('data-author-id');
   bootbox.confirm('Are you sure?', function(result) {
     if(result) {
@@ -54,6 +66,7 @@ $(document).on('click', '#remove-author', function(){
   });
 });
 
+// remove author from single author view
 $('#single-remove-author').on('click', function(){
   var authorID = $(this).attr('data-author-id');
   bootbox.confirm('Are you sure?', function(result) {

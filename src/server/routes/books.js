@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var queries = require('../db/queries');
+var databaseHelpers = require('../db/helpers');
 var helpers = require('../auth/helpers');
 
 
@@ -30,10 +31,12 @@ router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
 router.get('/', function(req, res, next) {
   queries.getBooks()
   .then(function(books){
+    var genres = databaseHelpers.filterGenres(books);
     res.render('./books/all-books', {
       user: req.user,
       messages: req.flash('messages'),
-      books: books
+      books: books,
+      genres: genres
     });
   })
   .catch(function(err){
