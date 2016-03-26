@@ -1,4 +1,5 @@
-var genreList = genres.split(','); // from swig template
+var genres = "{{ genres }}"; // from swig template
+var genreList = genres.split(',');
 
 // fuzzy search for books
 $('#search-books').on('keyup', function() {
@@ -11,12 +12,6 @@ $('#search-books').on('keyup', function() {
     }).show();
   });
 });
-
-function searchIn(query, list) {
-  return list.filter(function(el) {
-    return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-  });
-}
 
 // filter books by genre
 $(document).on('click', '#genre', function(){
@@ -69,44 +64,6 @@ $('#single-remove-book').on('click', function(){
       })
       .done(function() {
         window.location.replace('/books');
-      })
-      .fail(function(err) {
-        console.log(err);
-      });
-    }
-  });
-});
-
-// remove author from all authors view
-$(document).on('click', '.remove-author', function(){
-  var authorID = $(this).attr('data-author-id');
-  bootbox.confirm('Are you sure?', function(result) {
-    if(result) {
-      $.ajax({
-        url: '/authors/'+authorID,
-        type: 'DELETE'
-      })
-      .done(function() {
-        location.reload();
-      })
-      .fail(function(err) {
-        console.log(err);
-      });
-    }
-  });
-});
-
-// remove author from single author view
-$('#single-remove-author').on('click', function(){
-  var authorID = $(this).attr('data-author-id');
-  bootbox.confirm('Are you sure?', function(result) {
-    if(result) {
-      $.ajax({
-        url: '/authors/'+authorID,
-        type: 'DELETE'
-      })
-      .done(function() {
-        window.location.replace('/authors');
       })
       .fail(function(err) {
         console.log(err);

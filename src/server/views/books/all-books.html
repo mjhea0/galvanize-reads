@@ -2,12 +2,12 @@
 
 {% block title %}{% endblock %}
 
+{% block scripts %}
+  <script type="text/javascript" src="/js/books.js"></script>
+{% endblock %}
+
 
 {% block content %}
-
-  <script>
-   var genres = "{{ genres }}";
-  </script>
 
   {% include '../partials/books-header.html' %}
 
