@@ -1,3 +1,4 @@
+// filter books by genre
 $(document).on('click', '#genre', function(){
   var genre = $.trim($(this).text());
   $('.book').filter(function(){

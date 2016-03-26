@@ -19,5 +19,5 @@ As an admin I need to be able to delete an existing author,Create delete author 
 "As a user, I need to search for books",Add a field to the books list page to enter a search term for a book,No,Add the ability to search for a record to the books list route,No,,,,,,,,
 "As a user, I need to be able to search for authors",Add a field to the authors list page to enter a search term for an author,No,Add the ability to search for a record to the authors route,No,,,,,,,,
 "As a user, I need to be able to search for books and authors",Add the ability to enter a search term on the index page for authors or books,No,Add a route that can do a general search between books and authors,No,Add a view that displays the results of the search,No,,,,,,
-"As a user, I need to be able see the total number of books","On the books list page, display the total number of books in the database",No,,,,,,,,,,
-"As a user, I need to be able to see the total number of authors","On the authors list page, display the total number of authors in the database",No,,,,,,,,,,
+"As a user, I need to be able see the total number of books","On the books list page, display the total number of books in the database",x,,,,,,,,,,
+"As a user, I need to be able to see the total number of authors","On the authors list page, display the total number of authors in the database",x,,,,,,,,,,

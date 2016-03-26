@@ -33,7 +33,8 @@ router.get('/', function(req, res, next) {
     res.render('./authors/all-authors', {
       user: req.user,
       messages: req.flash('messages'),
-      authors: authors
+      authors: authors,
+      total_authors: authors.length
     });
   })
   .catch(function(err){

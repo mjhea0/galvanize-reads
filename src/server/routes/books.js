@@ -36,7 +36,8 @@ router.get('/', function(req, res, next) {
       user: req.user,
       messages: req.flash('messages'),
       books: books,
-      genres: genres
+      genres: genres,
+      total_books: books.length
     });
   })
   .catch(function(err){
