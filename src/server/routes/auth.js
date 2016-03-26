@@ -8,6 +8,7 @@ var helpers = require('../auth/helpers');
 
 
 router.get('/login', helpers.loginRedirect, function(req, res, next) {
+  req.session.returnTo = req.header('referer');
   res.render('./auth/login', { messages: req.flash('messages') });
 });
 
@@ -28,7 +29,8 @@ router.post('/login', function(req, res, next) {
             status: 'success',
             value: 'Welcome!'
           });
-          return res.redirect('/');
+          res.redirect(req.session.returnTo || '/');
+          delete req.session.returnTo;
         }
       });
     }
