@@ -22,3 +22,7 @@ a {
 .genre {
   cursor: pointer;
 }
+
+.remove-filter {
+  display: none;
+}

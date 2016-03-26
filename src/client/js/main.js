@@ -7,6 +7,15 @@ $(document).on('click', '#genre', function(){
   $('.book').filter(function(){
     return $(this).data('book-genre') !== genre;
   }).hide();
+  $('.remove-filter').show();
+});
+
+// remove filter
+$('.remove-filter').on('click', function(){
+  $(this).hide();
+  $('.book').filter(function(){
+    return $(this).data('book-genre');
+  }).show();
 });
 
 
