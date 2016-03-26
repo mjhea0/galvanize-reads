@@ -31,13 +31,13 @@ router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
 router.get('/', function(req, res, next) {
   queries.getBooks()
   .then(function(books){
-    var genres = databaseHelpers.filterGenres(books);
+    var genres = databaseHelpers.filterData(books, 'genre');
     res.render('./books/all-books', {
       user: req.user,
       messages: req.flash('messages'),
       books: books,
       genres: genres,
-      total_books: books.length
+      totalBooks: books.length
     });
   })
   .catch(function(err){

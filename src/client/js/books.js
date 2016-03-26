@@ -1,5 +1,4 @@
-var genres = "{{ genres }}"; // from swig template
-var genreList = genres.split(',');
+var genreList = genres.split(','); // from swig template
 
 // fuzzy search for books
 $('#search-books').on('keyup', function() {

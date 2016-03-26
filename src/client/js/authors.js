@@ -1,15 +1,13 @@
-var authors = "{{ authors }}"; // from swig template
-var authorList = authors.split(','); // from swig template
-console.log(authorList);
+var authorList = lastNames.split(','); // from swig template
 
 // fuzzy search for authors
 $('#search-authors').on('keyup', function() {
-  $('.book').hide();
+  $('.author').hide();
   var term = $.trim($(this).val());
-  var applicableGenreList = searchIn(term, genreList);
-  applicableGenreList.forEach(function(genre){
-    $('.book').filter(function() {
-      return $(this).data('book-genre') === genre;
+  var applicableNameList = searchIn(term, authorList);
+  applicableNameList.forEach(function(lastName){
+    $('.author').filter(function() {
+      return $(this).data('author-last-name') === lastName;
     }).show();
   });
 });

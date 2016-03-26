@@ -8,13 +8,17 @@
 
 {% block content %}
 
+  <script type="text/javascript">
+    var lastNames = "{{ lastNames }}";
+  </script>
+
   {% include '../partials/authors-header.html' %}
 
   <br><br>
 
   <div class="row">
     <div class="col-md-2">
-      <h2>Total Authors:&nbsp;<span><em>{{ total_authors }}</em></span></h2>
+      <h2>Total Authors:&nbsp;<span><em>{{ totalAuthors }}</em></span></h2>
       {% if authors.length %}
         <h2>Search:</h2>
         <form>
@@ -31,7 +35,7 @@
     <div class="col-sm-10">
       {% if authors.length %}
         {% for author in authors %}
-          <div class="author" data-book-author="{{ book.last_name }}">
+          <div class="author" data-author-last-name="{{ author.last_name }}">
             <div class="row">
               <div class="col-md-2">
                 <img class="img-responsive author-image" src="{{ author.portrait_url }}">

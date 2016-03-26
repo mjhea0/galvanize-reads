@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var queries = require('../db/queries');
+var databaseHelpers = require('../db/helpers');
 var helpers = require('../auth/helpers');
 
 
@@ -30,11 +31,13 @@ router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
 router.get('/', function(req, res, next) {
   queries.getAuthors()
   .then(function(authors){
+    var lastNames = databaseHelpers.filterData(authors, 'last_name');
     res.render('./authors/all-authors', {
       user: req.user,
       messages: req.flash('messages'),
       authors: authors,
-      total_authors: authors.length
+      lastNames: lastNames,
+      totalAuthors: authors.length
     });
   })
   .catch(function(err){
