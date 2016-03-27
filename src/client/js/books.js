@@ -2,23 +2,34 @@ var genreList = genres.split(','); // from swig template
 
 // fuzzy search for books
 $('#search-books').on('keyup', function() {
+  $('#pagination').hide();
   // remove any filters (if applicable)
   $('#remove-filter').hide();
-  $('.book').filter(function(){
+  $('.book').filter(function() {
     return $(this).data('book-genre');
   }).show();
   $('.book').hide();
   var term = $.trim($(this).val());
-  var applicableGenreList = searchIn(term, genreList);
-  applicableGenreList.forEach(function(genre){
-    $('.book').filter(function() {
-      return $(this).data('book-genre') === genre;
-    }).show();
-  });
+  if(!term) {
+    $('.book').show();
+    $('#pagination').show();
+  } else {
+    var applicableGenreList = searchIn(term, genreList);
+    if(applicableGenreList.length) {
+      applicableGenreList.forEach(function(genre) {
+        $('.book').filter(function() {
+          return $(this).data('book-genre') === genre;
+        }).show();
+      });
+    } else {
+      console.log('No results!');
+    }
+  }
 });
 
 // filter books by genre
-$(document).on('click', '#genre', function(){
+$(document).on('click', '#genre', function() {
+  $('#pagination').hide();
   var genre = $.trim($(this).text());
   $('.book').filter(function() {
     return $(this).data('book-genre') === genre;
@@ -30,16 +41,17 @@ $(document).on('click', '#genre', function(){
 });
 
 // remove filter
-$('#remove-filter').on('click', function(){
+$('#remove-filter').on('click', function() {
+  $('#pagination').show();
   $(this).hide();
-  $('.book').filter(function(){
+  $('.book').filter(function() {
     return $(this).data('book-genre');
   }).show();
 });
 
 
 // remove book from all books view
-$(document).on('click', '.remove-book', function(){
+$(document).on('click', '.remove-book', function() {
   var bookID = $(this).attr('data-book-id');
   bootbox.confirm('Are you sure?', function(result) {
     if(result) {
@@ -48,7 +60,7 @@ $(document).on('click', '.remove-book', function(){
         type: 'DELETE'
       })
       .done(function() {
-        location.reload();
+        window.location.replace('/books');
       })
       .fail(function(err) {
         console.log(err);
@@ -58,7 +70,7 @@ $(document).on('click', '.remove-book', function(){
 });
 
 // remove book from single book view
-$('#single-remove-book').on('click', function(){
+$('#single-remove-book').on('click', function() {
   var bookID = $(this).attr('data-book-id');
   bootbox.confirm('Are you sure?', function(result) {
     if(result) {
