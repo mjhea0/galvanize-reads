@@ -82,8 +82,8 @@ exports.seed = function(knex, Promise) {
       book_title: 'Think Java'
     }),
     knex('authors').insert({
-      first_name: 'Chris',
-      last_name: 'Mayfield',
+      first_name: 'Julia',
+      last_name: 'Elman',
       biography: 'Julia Elman is a designer, developer, author, speaker and tech education advocate based in North Carolina and has been working her brand of web skills since 2002. Her creative nature drove her to find work at Hallmark Cards, Inc in 2007 where she worked on projects such as the Product (RED) campaign and Hallmark\'s site re-design. From there, she took a dive into Django as a Junior Designer/Developer at World Online in Lawrence, KS. In early 2013, she helped start a local chapter of Girl Develop It and empowered over 1000 members to learn computer programming. She also helped organize the 2013 Teen Tech Camp, where 20 local teens learned Python programming in a one-day event.',
       portrait_url: 'http://cdn.oreillystatic.com/images/people/154/julia_elman-1.jpg',
       book_title: 'Lightweight Django'
