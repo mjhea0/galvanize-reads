@@ -38,6 +38,55 @@ exports.seed = function(knex, Promise) {
       biography: 'Kyle Simpson is an Open Web Evangelist who\'s passionate about all things JavaScript. He\'s an author, workshop trainer, tech speaker, and OSS contributor/leader.',
       portrait_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/kyle_simpson.jpg',
       book_title: 'You Don\'t Know JS'
+    }),
+    knex('authors').insert({
+      first_name: 'George',
+      last_name: 'Heineman',
+      biography: 'George T. Heineman is an Associate Professor of Computer Science at WPI. His research interests are in Software Engineering. He co-edited the 2001 book "Component-Based Software Engineering: Putting the Pieces Together". He was the Program Chair for the 2005 International Symposium on Component-Based Software Engineering.',
+      portrait_url: 'http://cdn.oreillystatic.com/images/people/154/george_heineman1.jpg',
+      book_title: 'Algorithms in a Nutshell'
+    }),
+    knex('authors').insert({
+      first_name: 'David',
+      last_name: 'Flanagan',
+      biography: 'David Flanagan is a computer programmer who spends most of his time writing about JavaScript and Java. His books with O\'Reilly include JavaScript: The Definitive Guide, JavaScript Pocket Reference, Java in a Nutshell, Java Examples in a Nutshell, and Java Foundation Classes in a Nutshell.',
+      portrait_url: 'http://cdn.oreillystatic.com/images/people/154/george_heineman1.jpg',
+      book_title: 'The Ruby Programming Language'
+    }),
+    knex('authors').insert({
+      first_name: 'Jay',
+      last_name: 'McGavren',
+      biography: 'Jay McGavren was doing automation for a hotel services company when a colleague introduced him to Programming Perl (a.k.a. the Camel Book). It made him an instant Perl convert, as he liked actually writing code instead of waiting for a 10-person development team to configure a build system. It also gave him the crazy idea to write a technical book someday.',
+      portrait_url: 'http://cdn.oreillystatic.com/images/people/154/jay_mcgavren1.jpg',
+      book_title: 'Head First Ruby'
+    }),
+    knex('authors').insert({
+      first_name: 'Shyam',
+      last_name: 'Seshadri',
+      biography: 'JCurrently based out of India, Shyam Seshadri is the CEO of Fundoo Solutions (http://www.befundoo.com), Ex-Googler, Author and Chef. He currently spends his time working on interesting product ideas, conducting training sessions internationally on AngularJS & NodeJS, and providing development and architecture consulting on AngularJS, NodeJS and Mobile applications. He conducts extensive, customized two and three day, hands-on workshops for AngularJS & NodeJS, which have been well received internationally.',
+      portrait_url: 'http://cdn.oreillystatic.com/images/people/154/shyam_seshadri-1.jpg',
+      book_title: 'AngularJS: Up and Running'
+    }),
+    knex('authors').insert({
+      first_name: 'Ethan',
+      last_name: 'Brown',
+      biography: 'Ethan Brown is a senior software engineer at Pop Art, a Portland-based interactive marketing agency, where he is responsible for the architecture and implementation of web sites and web services for clients ranging from small businesses to international enterprise companies. He has over twenty years of programming experience, from embedded to the web, and has embraced the JavaScript stack as the web platform of the future.',
+      portrait_url: 'http://cdn.oreillystatic.com/images/people/154/ethan_brown.jpg',
+      book_title: 'Web Development with Node and Express'
+    }),
+    knex('authors').insert({
+      first_name: 'Chris',
+      last_name: 'Mayfield',
+      biography: 'Chris Mayfield is an Assistant Professor of Computer Science at James Madison University. He has a Ph.D. in Computer Science from Purdue University and Bachelor\'s degrees in CS and German from the University of Utah. His research focuses on CS education and K-12.',
+      portrait_url: 'http://cdn.oreillystatic.com/images/people/154/ethan_brown.jpg',
+      book_title: 'Think Java'
+    }),
+    knex('authors').insert({
+      first_name: 'Chris',
+      last_name: 'Mayfield',
+      biography: 'Julia Elman is a designer, developer, author, speaker and tech education advocate based in North Carolina and has been working her brand of web skills since 2002. Her creative nature drove her to find work at Hallmark Cards, Inc in 2007 where she worked on projects such as the Product (RED) campaign and Hallmark\'s site re-design. From there, she took a dive into Django as a Junior Designer/Developer at World Online in Lawrence, KS. In early 2013, she helped start a local chapter of Girl Develop It and empowered over 1000 members to learn computer programming. She also helped organize the 2013 Teen Tech Camp, where 20 local teens learned Python programming in a one-day event.',
+      portrait_url: 'http://cdn.oreillystatic.com/images/people/154/julia_elman-1.jpg',
+      book_title: 'Lightweight Django'
     })
 
   );

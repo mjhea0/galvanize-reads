@@ -27,6 +27,48 @@ exports.seed = function(knex, Promise) {
       genre: 'JavaScript',
       description: 'No matter how much experience you have with JavaScript, odds are you don’t fully understand the language. As part of the ""You Don’t Know JS"" series, this compact guide focuses on new features available in ECMAScript 6 (ES6), the latest version of the standard upon which JavaScript is built.',
       cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/es6_and_beyond.jpg'
+    }),
+    knex('books').insert({
+      title: 'Algorithms in a Nutshell',
+      genre: 'Computer Science',
+      description: 'Creating robust software requires the use of efficient algorithms, but programmers seldom think about them until a problem occurs. This updated edition of Algorithms in a Nutshell describes a large number of existing algorithms for solving a variety of problems, and helps you select and implement the right algorithm for your needs—with just enough math to let you understand and analyze algorithm performance.',
+      cover_url: 'http://akamaicovers.oreilly.com/images/0636920032885/lrg.jpg'
+    }),
+    knex('books').insert({
+      title: 'The Ruby Programming Language',
+      genre: 'Ruby',
+      description: 'The Ruby Programming Language documents the Ruby language definitively but without the formality of a language specification. It is written for experienced programmers who are new to Ruby, and for current Ruby programmers who want to challenge their understanding and increase their mastery of the language.',
+      cover_url: 'http://akamaicovers.oreilly.com/images/9780596516178/lrg.jpg'
+    }),
+    knex('books').insert({
+      title: 'Head First Ruby',
+      genre: 'Ruby',
+      description: 'What’s all the buzz about this Ruby language? Is it right for you? Well, ask yourself: are you tired of all those extra declarations, keywords, and compilation steps in your other language? Do you want to be a more productive programmer? Then you’ll love Ruby. With this unique hands-on learning experience, you’ll discover how Ruby takes care of all the details for you, so you can simply have fun and get more done with less code.',
+      cover_url: 'http://akamaicovers.oreilly.com/images/9780596803995/lrg.jpg'
+    }),
+    knex('books').insert({
+      title: 'AngularJS: Up and Running',
+      genre: 'JavaScript',
+      description: 'If you want to get started with AngularJS, either as a side project, an additional tool, or for your main work, this practical guide teaches you how to use this meta-framework step-by-step, from the basics to advanced concepts. By the end of the book, you’ll understand how to develop a large, maintainable, and performant application with AngularJS.',
+      cover_url: 'http://akamaicovers.oreilly.com/images/0636920033486/lrg.jpg'
+    }),
+    knex('books').insert({
+      title: 'Web Development with Node and Express',
+      genre: 'JavaScript',
+      description: 'Learn how to build dynamic web applications with Express, a key component of the Node/JavaScript development stack. In this hands-on guide, author Ethan Brown teaches you the fundamentals through the development of a fictional application that exposes a public website and a RESTful API. You’ll also learn web architecture best practices to help you build single-page, multi-page, and hybrid web apps with Express.',
+      cover_url: 'http://akamaicovers.oreilly.com/images/0636920032977/lrg.jpg'
+    }),
+    knex('books').insert({
+      title: 'Think Java',
+      genre: 'Java',
+      description: 'Think Java is appropriate as a textbook in an introductory college or high school class. The book is currently in use at several colleges, universities, and high schools. It’s appropriate for people learning Java as a first language, including students learning on their own and professionals who are retraining.',
+      cover_url: 'http://akamaicovers.oreilly.com/images/0636920041610/rc_lrg.jpg'
+    }),
+    knex('books').insert({
+      title: 'Lightweight Django',
+      genre: 'Python',
+      description: 'How can you take advantage of the Django framework to integrate complex client-side interactions and real-time features into your web applications? Through a series of rapid application development projects, this hands-on book shows experienced Django developers how to include REST APIs, WebSockets, and client-side MVC frameworks such as Backbone.js into new or existing projects.',
+      cover_url: 'http://akamaicovers.oreilly.com/images/0636920032502/lrg.jpg'
     })
 
   );
