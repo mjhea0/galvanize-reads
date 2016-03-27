@@ -2,6 +2,7 @@ var authorList = lastNames.split(','); // from swig template
 
 // fuzzy search for authors
 $('#search-authors').on('keyup', function() {
+  $('#no-results').hide();
   $('#pagination').hide();
   $('.author').hide();
   var term = $.trim($(this).val());
@@ -17,7 +18,7 @@ $('#search-authors').on('keyup', function() {
         }).show();
       });
     } else {
-      console.log('No results!');
+      $('#no-results').show();
     }
   }
 });

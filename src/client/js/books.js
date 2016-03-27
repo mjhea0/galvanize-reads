@@ -2,6 +2,7 @@ var genreList = genres.split(','); // from swig template
 
 // fuzzy search for books
 $('#search-books').on('keyup', function() {
+  $('#no-results').hide();
   $('#pagination').hide();
   // remove any filters (if applicable)
   $('#remove-filter').hide();
@@ -22,13 +23,14 @@ $('#search-books').on('keyup', function() {
         }).show();
       });
     } else {
-      console.log('No results!');
+      $('#no-results').show();
     }
   }
 });
 
 // filter books by genre
 $(document).on('click', '#genre', function() {
+  $('#no-results').hide();
   $('#pagination').hide();
   var genre = $.trim($(this).text());
   $('.book').filter(function() {

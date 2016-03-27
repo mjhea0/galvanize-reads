@@ -26,3 +26,11 @@ a {
 .remove-filter {
   display: none;
 }
+
+.no-book-results {
+  display: none;
+}
+
+.no-author-results {
+  display: none;
+}

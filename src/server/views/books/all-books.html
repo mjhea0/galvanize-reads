@@ -47,6 +47,7 @@
     </div>
     <div class="col-md-10">
       {% if books.length %}
+        <h3 class="no-book-results" id="no-results">No books!</h3>
         {% for book in books %}
           <div class="book" data-book-genre="{{ book.genre }}">
             <div class="row">

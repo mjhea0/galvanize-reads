@@ -34,6 +34,7 @@
     </div>
     <div class="col-sm-10">
       {% if authors.length %}
+        <h3 class="no-author-results" id="no-results">No Authors!</h3>
         {% for author in authors %}
           <div class="author" data-author-last-name="{{ author.last_name }}">
             <div class="row">
