@@ -35,7 +35,7 @@
         <h2>Search:</h2>
         <form>
           <div class="form-group">
-            <input type="text" class="form-control" id="search-books" placeholder="Search">
+            <input type="text" class="form-control" id="search-books" placeholder="Search (genre)">
           </div>
         </form>
         <br><br>
@@ -68,6 +68,16 @@
           </div>
           <br><br>
         {% endfor %}
+        {% if pageCount > 1 %}
+          <ul class="pagination">
+            {% if currentPage > 1 %}
+              <li><a href="/books?page=1">&laquo;&nbsp;Previous</a></li>
+            {% endif %}
+            {% if currentPage !== pageCount %}
+              <li><a href="/books?page={{ currentPage+1 }}">Next&nbsp;&raquo;</a></li>
+            {% endif %}
+          </ul>
+        {% endif %}
       {% endif %}
     </div>
   </div>
