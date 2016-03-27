@@ -2,6 +2,11 @@ var genreList = genres.split(','); // from swig template
 
 // fuzzy search for books
 $('#search-books').on('keyup', function() {
+  // remove any filters (if applicable)
+  $('#remove-filter').hide();
+  $('.book').filter(function(){
+    return $(this).data('book-genre');
+  }).show();
   $('.book').hide();
   var term = $.trim($(this).val());
   var applicableGenreList = searchIn(term, genreList);
@@ -25,7 +30,7 @@ $(document).on('click', '#genre', function(){
 });
 
 // remove filter
-$('.remove-filter').on('click', function(){
+$('#remove-filter').on('click', function(){
   $(this).hide();
   $('.book').filter(function(){
     return $(this).data('book-genre');
