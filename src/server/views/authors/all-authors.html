@@ -59,6 +59,16 @@
           </div>
           <br><br>
         {% endfor %}
+        {% if pageCount > 1 %}
+          <ul class="pagination">
+            {% if currentPage > 1 %}
+              <li><a href="/authors?page=1">&laquo;&nbsp;Previous</a></li>
+            {% endif %}
+            {% if currentPage !== pageCount %}
+              <li><a href="/authors?page={{ currentPage+1 }}">Next&nbsp;&raquo;</a></li>
+            {% endif %}
+          </ul>
+        {% endif %}
       {% endif %}
     </div>
   </div>

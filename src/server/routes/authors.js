@@ -3,17 +3,18 @@ var router = express.Router();
 
 var queries = require('../db/queries');
 var databaseHelpers = require('../db/helpers');
-var helpers = require('../auth/helpers');
+var authHelpers = require('../auth/helpers');
+var routeHelpers = require('./helpers');
 
 
-router.get('/new', helpers.ensureAdmin, function(req, res, next) {
+router.get('/new', authHelpers.ensureAdmin, function(req, res, next) {
   res.render('./authors/add-author', {
     user: req.user,
     messages: req.flash('messages')
   });
 });
 
-router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
+router.get('/:id/edit', authHelpers.ensureAdmin, function(req, res, next) {
   queries.getSingleAuthor(parseInt(req.params.id))
   .then(function(author){
     res.render('./authors/edit-author', {
@@ -29,15 +30,26 @@ router.get('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
 
 // get ALL authors
 router.get('/', function(req, res, next) {
+  var currentPage = 0;
+  if (req.query.page) {
+    currentPage += parseInt(req.query.page);
+  } else {
+    currentPage = 1;
+  }
   queries.getAuthors()
   .then(function(authors){
+    var totalAuthors = authors.length;
     var lastNames = databaseHelpers.filterData(authors, 'last_name');
+    var groupedAuthors = routeHelpers.createChunks(authors);
+    var pageCount = Math.ceil(totalAuthors / 10);
     res.render('./authors/all-authors', {
       user: req.user,
       messages: req.flash('messages'),
-      authors: authors,
+      authors: groupedAuthors[currentPage-1],
       lastNames: lastNames,
-      totalAuthors: authors.length
+      totalAuthors: totalAuthors,
+      pageCount: pageCount,
+      currentPage: currentPage
     });
   })
   .catch(function(err){
@@ -61,7 +73,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 // add new author
-router.post('/', helpers.ensureAdmin, function(req, res, next) {
+router.post('/', authHelpers.ensureAdmin, function(req, res, next) {
   queries.addAuthor(req.body)
   .then(function(author){
     req.flash('messages', {
@@ -76,7 +88,7 @@ router.post('/', helpers.ensureAdmin, function(req, res, next) {
 });
 
 // update author
-router.post('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
+router.post('/:id/edit', authHelpers.ensureAdmin, function(req, res, next) {
   queries.updateAuthor(parseInt(req.params.id), req.body)
   .then(function(author){
     req.flash('messages', {
@@ -91,7 +103,7 @@ router.post('/:id/edit', helpers.ensureAdmin, function(req, res, next) {
 });
 
 // remove author
-router.delete('/:id', helpers.ensureAdmin, function(req, res, next) {
+router.delete('/:id', authHelpers.ensureAdmin, function(req, res, next) {
   queries.deleteAuthor(parseInt(req.params.id))
   .then(function(author){
     res.status(200).json({ status: 'success' });

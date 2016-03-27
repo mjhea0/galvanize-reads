@@ -28,18 +28,6 @@ router.get('/:id/edit', authHelpers.ensureAdmin, function(req, res, next) {
   });
 });
 
-
-
-//   //render index.ejs view file
-//   res.render('index', {
-//     students: studentsList,
-//     pageSize: pageSize,
-//     totalStudents: totalStudents,
-//     pageCount: pageCount,
-//     currentPage: currentPage
-//   });
-// });
-
 // get ALL books
 router.get('/', function(req, res, next) {
   var currentPage = 0;
