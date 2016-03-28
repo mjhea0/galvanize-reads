@@ -66,6 +66,7 @@ $(document).on('click', '.remove-book', function() {
       })
       .fail(function(err) {
         console.log(err);
+        window.location.replace('/books');
       });
     }
   });
@@ -85,6 +86,7 @@ $('#single-remove-book').on('click', function() {
       })
       .fail(function(err) {
         console.log(err);
+        window.location.replace('/books');
       });
     }
   });

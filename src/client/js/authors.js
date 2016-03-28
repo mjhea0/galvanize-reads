@@ -37,6 +37,7 @@ $(document).on('click', '.remove-author', function() {
       })
       .fail(function(err) {
         console.log(err);
+        window.location.replace('/authors');
       });
     }
   });
@@ -56,6 +57,7 @@ $('#single-remove-author').on('click', function() {
       })
       .fail(function(err) {
         console.log(err);
+        window.location.replace('/authors');
       });
     }
   });
