@@ -6,7 +6,7 @@
 {% block content %}
 
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
       <h1 class="page-header">Galvanize Reads</h1>
     </div>
   </div>
@@ -21,6 +21,18 @@
       <a href="/authors">
         <img class="img-responsive" src="http://placehold.it/700x400/5cb85c/000000?text=Authors">
       </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <h2>Quick Search</h2>
+      <form action="/search" method="post">
+        <div class="form-group">
+          <input type="text" class="form-control" name="term" placeholder="Search (by genre)">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
     </div>
   </div>
 

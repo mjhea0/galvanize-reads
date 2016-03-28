@@ -1,0 +1,35 @@
+{% extends '_layout.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  {% include './partials/search-header.html' %}
+
+  <br><br>
+
+  <div class="row">
+    <div class="col-md-10">
+      {% if results.length %}
+        {% for result in results %}
+          <div class="result" data-result-genre="{{ result.genre }}">
+            <div class="row">
+              <div class="col-md-4">
+                <img class="img-responsive result-image" src="{{ result.cover_url }}">
+              </div>
+              <div class="col-md-6 col-md-offset-1">
+                <h3><a href="/results/{{ result.id }}">{{ result.title }}</a></h3>
+                <h4>{{ result.genre }}</h4>
+                <p>{{ result.description }}</p>
+              </div>
+            </div>
+            <br><br>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h3>No Results!</h3>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

@@ -79,5 +79,5 @@ module.exports = {
   addAuthor: addAuthor,
   updateAuthor: updateAuthor,
   deleteAuthor: deleteAuthor,
-  makeAdmin: makeAdmin
+  makeAdmin: makeAdmin,
 };
