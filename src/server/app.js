@@ -4,7 +4,7 @@ require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var swig = require('swig');
@@ -36,7 +36,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // *** config middleware *** //
-app.use(logger('dev'));
+if (process.env.NODE_ENV !== 'test') {
+  logger = morgan('combined');
+  app.use(logger);
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/server/bin/www"
+    "start": "node ./src/server/bin/www",
+    "test": "mocha"
   },
   "dependencies": {
     "bcrypt": "^0.8.5",
@@ -20,6 +21,12 @@
     "passport-local": "^1.0.0",
     "pg": "^4.5.1",
     "serve-favicon": "~2.3.0",
+    "sqlite3": "^3.1.2",
     "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "passport-stub": "^1.1.1"
   }
 }

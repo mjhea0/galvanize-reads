@@ -58,7 +58,8 @@ router.post('/register', function(req, res, next) {
         .returning('*')
         .insert({
           email: email,
-          password: hashedPassword
+          password: hashedPassword,
+          admin: false
         })
         .then(function(data) {
           req.logIn(data[0], function(err) {
