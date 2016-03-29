@@ -11,7 +11,7 @@ var should = chai.should();
 // passportStub.install(server);
 chai.use(chaiHttp);
 
-describe('index', function() {
+describe('GET /', function() {
   it('should render correctly', function(done) {
     chai.request(server)
     .get('/')
