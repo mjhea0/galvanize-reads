@@ -73,4 +73,46 @@ describe('book routes:', function() {
     });
   });
 
+  describe('GET /books/:id', function() {
+    it('should display a single book', function(done) {
+      chai.request(server)
+      .get('/books/'+allBooks[0].id)
+      .end(function(err, res) {
+        res.should.have.status(200);
+        res.should.be.html;  // jshint ignore:line
+        res.text.should.have.string(
+          '<h1 class="page-header">Galvanize Reads<small>&nbsp;Books</small></h1>'
+        );
+        res.text.should.have.string(allBooks[0].title);
+        done();
+      });
+    });
+  });
+
+  describe('POST /books', function() {
+    describe('if not an admin', function() {
+      it('should add not a book', function(done) {
+        chai.request(server)
+        .post('/books')
+        .send({
+          title: 'Real Python',
+          genre: 'Python',
+          description: 'A book about Python!',
+          cover_url: 'https://realpython.com/real.png'
+        })
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.html;  // jshint ignore:line
+          res.text.should.have.string(
+            '<h1 class="page-header">Galvanize Reads</h1>');
+          queries.getBooks()
+            .then(function(books) {
+              allBooks.length.should.equal(books.length);
+              done();
+            });
+        });
+      });
+    });
+  });
+
 });
