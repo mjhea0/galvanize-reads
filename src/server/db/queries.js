@@ -60,6 +60,13 @@ function deleteAuthor(authorID) {
     .where('id', authorID);
 }
 
+// *** users *** //
+
+function addUser(obj) {
+  return knex('users')
+    .insert(obj);
+}
+
 // *** helpers *** //
 
 function makeAdmin(userID) {
@@ -79,5 +86,6 @@ module.exports = {
   addAuthor: addAuthor,
   updateAuthor: updateAuthor,
   deleteAuthor: deleteAuthor,
+  addUser: addUser,
   makeAdmin: makeAdmin,
 };
