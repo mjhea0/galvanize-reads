@@ -4,7 +4,9 @@ var knex = require('./knex');
 
 function getBooks() {
   return knex('books')
-    .select();
+    .select()
+    .innerJoin('books_authors', 'books.id', 'book_id')
+    .innerJoin('authors', 'author_id', 'authors.id');
 }
 
 function getSingleBook(bookID) {
@@ -41,8 +43,10 @@ function getAuthors() {
 
 function getSingleAuthor(authorID) {
   return knex('authors')
-    .select()
-    .where('id', authorID);
+    .select('*', 'authors.id AS author_id')
+    .leftOuterJoin('books_authors', 'authors.id', 'author_id')
+    .leftOuterJoin('books', 'book_id', 'books.id')
+    .where('authors.id', authorID);
 }
 
 function addAuthor(obj) {

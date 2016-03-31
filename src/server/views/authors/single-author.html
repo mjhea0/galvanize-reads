@@ -23,7 +23,6 @@
           <ol>
             {% for book in author.books %}
               <li><a href="/books/{{ book.id }}">{{ book.title }}</a></li>
-              }
             {% endfor %}
           </ol>
           {% if user.admin %}

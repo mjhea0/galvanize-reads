@@ -37,10 +37,12 @@ router.get('/', function(req, res, next) {
     currentPage = 1;
   }
   queries.getBooks()
-  .then(function(books) {
+  .then(function(results) {
+    var books = databaseHelpers.mapAuthorsToBooks(results);
     var totalBooks = books.length;
     var genres = databaseHelpers.filterData(books, 'genre');
     var groupedBooks = routeHelpers.createChunks(books);
+    console.log(groupedBooks[0][0])
     var pageCount = Math.ceil(totalBooks / 10);
     res.render('./books/all-books', {
       user: req.user,
