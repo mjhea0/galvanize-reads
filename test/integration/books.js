@@ -2,10 +2,11 @@ process.env.NODE_ENV = 'test';
 
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var knex = require('../../src/server/db/knex');
-var queries = require('../../src/server/db/queries');
 var passportStub = require('passport-stub');
 
+var knex = require('../../src/server/db/knex');
+var queries = require('../../src/server/db/queries');
+var testHelpers = require('./helpers');
 var server = require('../../src/server/app');
 
 var should = chai.should();
@@ -115,24 +116,13 @@ describe('book routes:', function() {
       });
     });
     describe('if authenticated', function() {
-
       beforeEach(function(done) {
-        queries.addUser({
-          email: 'brad@ly.com',
-          password: '1234',
-          admin: false
-        })
-        .then(function(user) {
-          passportStub.login(user);
-          done();
-        });
+        testHelpers.autenticateUser(done);
       });
-
       afterEach(function(done) {
         passportStub.logout();
         done();
       });
-
       it('should not add a book', function(done) {
         chai.request(server)
         .post('/books')
@@ -149,14 +139,21 @@ describe('book routes:', function() {
             '<h1 class="page-header">Galvanize Reads</h1>');
           queries.getBooks()
             .then(function(books) {
-              allBooks.length.should.equal(books.length);
+              books.length.should.equal(allBooks.length);
               done();
             });
         });
       });
     });
     describe('if authenticated as an admin', function() {
-      it('should not add a book', function(done) {
+      beforeEach(function(done) {
+        testHelpers.autenticateAdmin(done);
+      });
+      afterEach(function(done) {
+        passportStub.logout();
+        done();
+      });
+      it('should add a book', function(done) {
         chai.request(server)
         .post('/books')
         .send({
@@ -169,10 +166,11 @@ describe('book routes:', function() {
           res.should.have.status(200);
           res.should.be.html;  // jshint ignore:line
           res.text.should.have.string(
-            '<h1 class="page-header">Galvanize Reads</h1>');
+            '<h1 class="page-header">Galvanize Reads<small>&nbsp;Books</small></h1>'
+          );
           queries.getBooks()
             .then(function(books) {
-              allBooks.length.should.equal(books.length);
+              books.length.should.equal(allBooks.length+1);
               done();
             });
         });

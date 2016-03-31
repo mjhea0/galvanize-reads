@@ -40,6 +40,7 @@ if (process.env.NODE_ENV !== 'test') {
   logger = morgan('combined');
   app.use(logger);
 }
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
