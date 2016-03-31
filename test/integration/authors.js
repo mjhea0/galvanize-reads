@@ -41,7 +41,7 @@ describe('author routes:', function() {
   });
 
   describe('GET /authors', function() {
-    it('should display all authors', function(done) {
+    it('should display the first page of authors', function(done) {
       chai.request(server)
       .get('/authors')
       .end(function(err, res) {
@@ -50,8 +50,31 @@ describe('author routes:', function() {
         res.text.should.have.string(
           '<h1 class="page-header">Galvanize Reads<small>&nbsp;Authors</small></h1>'
         );
+        res.text.should.have.string(
+          '<li><a href="/authors?page=2">Next&nbsp;&raquo;</a></li>'
+        );
         res.text.should.have.string(allAuthors[0].last_name);
         res.text.should.have.string(allAuthors[0].books[0].title);
+        res.text.should.have.string(
+          '<h2>Total Authors:&nbsp;<span><em>'+allAuthors.length+
+          '</em></span></h2>');
+        done();
+      });
+    });
+    it('should display the second page of authors', function(done) {
+      chai.request(server)
+      .get('/authors?page=2')
+      .end(function(err, res) {
+        res.should.have.status(200);
+        res.should.be.html;  // jshint ignore:line
+        res.text.should.have.string(
+          '<h1 class="page-header">Galvanize Reads<small>&nbsp;Authors</small></h1>'
+        );
+        res.text.should.have.string(
+          'li><a href="/authors?page=1">&laquo;&nbsp;Previous</a></li>'
+        );
+        res.text.should.have.string(allAuthors[10].last_name);
+        res.text.should.have.string(allAuthors[10].books[0].title);
         res.text.should.have.string(
           '<h2>Total Authors:&nbsp;<span><em>'+allAuthors.length+
           '</em></span></h2>');
