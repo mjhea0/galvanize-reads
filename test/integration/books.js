@@ -52,6 +52,7 @@ describe('book routes:', function() {
           '<h1 class="page-header">Galvanize Reads<small>&nbsp;Books</small></h1>'
         );
         res.text.should.have.string(allBooks[0].title);
+        res.text.should.have.string(allBooks[0].authors[0].first_name);
         res.text.should.have.string(
           '<h2>Total Books:&nbsp;<span><em>'+allBooks.length+
           '</em></span></h2>');
@@ -71,6 +72,7 @@ describe('book routes:', function() {
           '<h1 class="page-header">Galvanize Reads<small>&nbsp;Books</small></h1>'
         );
         res.text.should.have.string(allBooks[0].title);
+        res.text.should.have.string(allBooks[0].authors[0].first_name);
         done();
       });
     });

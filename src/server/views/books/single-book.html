@@ -19,6 +19,12 @@
           <h3>{{ book.title }}</h3>
           <h4>{{ book.genre }}</h4>
           <p>{{ book.description }}</p>
+          <p><strong>Authors:</strong></p>
+          <ol>
+            {% for author in book.authors %}
+              <li><a href="/authors/{{ author.id }}">{{ author.first_name }}&nbsp;{{ author.last_name }}</a></li>
+            {% endfor %}
+          </ol>
           {% if user.admin %}
             <div class="btn-group-lg" role="group">
               <a class="btn btn-success" href="/books/{{ book.id }}/edit" role="button">Edit</a>

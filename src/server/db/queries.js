@@ -11,8 +11,10 @@ function getBooks() {
 
 function getSingleBook(bookID) {
   return knex('books')
-    .select()
-    .where('id', bookID);
+    .select('*', 'books.id AS book_id')
+    .leftOuterJoin('books_authors', 'books.id', 'book_id')
+    .leftOuterJoin('authors', 'author_id', 'authors.id')
+    .where('books.id', bookID);
 }
 
 function addBook(obj) {

@@ -69,7 +69,8 @@ router.get('/', function(req, res, next) {
 // get SINGLE book
 router.get('/:id', function(req, res, next) {
   queries.getSingleBook(parseInt(req.params.id))
-  .then(function(book) {
+  .then(function(results) {
+    var book = databaseHelpers.mapAuthorsToBooks(results);
     res.render('./books/single-book', {
       user: req.user,
       messages: req.flash('messages'),
