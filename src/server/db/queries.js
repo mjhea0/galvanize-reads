@@ -34,7 +34,9 @@ function deleteBook(bookID) {
 
 function getAuthors() {
   return knex('authors')
-    .select();
+    .select('*', 'authors.id AS author_id')
+    .leftOuterJoin('books_authors', 'authors.id', 'author_id')
+    .leftOuterJoin('books', 'book_id', 'books.id');
 }
 
 function getSingleAuthor(authorID) {

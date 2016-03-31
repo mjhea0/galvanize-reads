@@ -90,6 +90,10 @@ exports.seed = function(knex, Promise) {
         authorID: authorIDs[0]
       },
       {
+        bookTitle: 'Python In A Nutshell',
+        authorID: authorIDs[1]
+      },
+      {
         bookTitle: 'Think Python',
         authorID: authorIDs[1]
       },

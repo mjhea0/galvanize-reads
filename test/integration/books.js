@@ -93,7 +93,7 @@ describe('book routes:', function() {
 
   describe('POST /books', function() {
     describe('if unauthenticated', function() {
-      it('should add not a book', function(done) {
+      it('should not add a book', function(done) {
         chai.request(server)
         .post('/books')
         .send({
@@ -171,6 +171,163 @@ describe('book routes:', function() {
           queries.getBooks()
             .then(function(books) {
               books.length.should.equal(allBooks.length+1);
+              done();
+            });
+        });
+      });
+    });
+  });
+
+  describe('PUT /books/:id/edit', function() {
+    describe('if unauthenticated', function() {
+      it('should not update a book', function(done) {
+        chai.request(server)
+        .post('/books/1/edit')
+        .send({
+          title: 'Real Python',
+          genre: 'Python',
+          description: 'A book about Python!',
+          cover_url: 'https://realpython.com/real.png'
+        })
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.html;  // jshint ignore:line
+          res.text.should.have.string(
+            '<h1 class="page-header">Galvanize Reads</h1>');
+          queries.getBooks()
+            .then(function(books) {
+              books[0].title.should.equal('Python In A Nutshell');
+              allBooks.length.should.equal(books.length);
+              done();
+            });
+        });
+      });
+    });
+    describe('if authenticated', function() {
+      beforeEach(function(done) {
+        testHelpers.autenticateUser(done);
+      });
+      afterEach(function(done) {
+        passportStub.logout();
+        done();
+      });
+      it('should not update a book', function(done) {
+        chai.request(server)
+        .post('/books/1/edit')
+        .send({
+          title: 'Real Python',
+          genre: 'Python',
+          description: 'A book about Python!',
+          cover_url: 'https://realpython.com/real.png'
+        })
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.html;  // jshint ignore:line
+          res.text.should.have.string(
+            '<h1 class="page-header">Galvanize Reads</h1>');
+          queries.getBooks()
+            .then(function(books) {
+              books[0].title.should.equal('Python In A Nutshell');
+              books.length.should.equal(allBooks.length);
+              done();
+            });
+        });
+      });
+    });
+    describe('if authenticated as an admin', function() {
+      beforeEach(function(done) {
+        testHelpers.autenticateAdmin(done);
+      });
+      afterEach(function(done) {
+        passportStub.logout();
+        done();
+      });
+      it('should update a book', function(done) {
+        chai.request(server)
+        .post('/books/1/edit')
+        .send({
+          title: 'Real Python',
+          genre: 'Python',
+          description: 'A book about Python!',
+          cover_url: 'https://realpython.com/real.png'
+        })
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.html;  // jshint ignore:line
+          res.text.should.have.string(
+            '<h1 class="page-header">Galvanize Reads<small>&nbsp;Books</small></h1>'
+          );
+          queries.getBooks()
+            .then(function(books) {
+              books[0].title.should.equal('Real Python');
+              books.length.should.equal(allBooks.length);
+              done();
+            });
+        });
+      });
+    });
+  });
+
+  describe('DELETE /books/:id', function() {
+    describe('if unauthenticated', function() {
+      it('should not delete a book', function(done) {
+        chai.request(server)
+        .delete('/books/1')
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.html;  // jshint ignore:line
+          res.text.should.have.string(
+            '<h1 class="page-header">Galvanize Reads</h1>');
+          queries.getBooks()
+            .then(function(books) {
+              allBooks.length.should.equal(books.length);
+              done();
+            });
+        });
+      });
+    });
+    describe('if authenticated', function() {
+      beforeEach(function(done) {
+        testHelpers.autenticateUser(done);
+      });
+      afterEach(function(done) {
+        passportStub.logout();
+        done();
+      });
+      it('should not delete a book', function(done) {
+        chai.request(server)
+        .delete('/books/1')
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.html;  // jshint ignore:line
+          res.text.should.have.string(
+            '<h1 class="page-header">Galvanize Reads</h1>');
+          queries.getBooks()
+            .then(function(books) {
+              allBooks.length.should.equal(books.length);
+              done();
+            });
+        });
+      });
+    });
+    describe('if authenticated as an admin', function() {
+      beforeEach(function(done) {
+        testHelpers.autenticateAdmin(done);
+      });
+      afterEach(function(done) {
+        passportStub.logout();
+        done();
+      });
+      it('should delete a book', function(done) {
+        chai.request(server)
+        .delete('/books/1')
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.json;  // jshint ignore:line
+          res.text.should.have.string('{"status":"success"}');
+          queries.getBooks()
+            .then(function(books) {
+              books.length.should.equal(allBooks.length-1);
               done();
             });
         });

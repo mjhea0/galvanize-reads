@@ -21,7 +21,10 @@
           <p>{{ author.biography }}</p>
           <p><strong>Bibliography:</strong></p>
           <ol>
-            <li><a href="/books/{{ author.book_id }}">{{ author.book_title }}</a></li>
+            {% for book in author.books %}
+              <li><a href="/books/{{ book.id }}">{{ book.title }}</a></li>
+              }
+            {% endfor %}
           </ol>
           {% if user.admin %}
             <div class="btn-group-lg" role="group">
