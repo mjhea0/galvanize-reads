@@ -7,6 +7,7 @@ var passportStub = require('passport-stub');
 var knex = require('../../src/server/db/knex');
 var queries = require('../../src/server/db/queries');
 var testHelpers = require('./helpers');
+var databaseHelpers = require('../../src/server/db/helpers');
 var server = require('../../src/server/app');
 
 var should = chai.should();
@@ -26,7 +27,7 @@ describe('book routes:', function() {
         .then(function() {
           queries.getBooks()
             .then(function(books) {
-              allBooks = books;
+              allBooks = databaseHelpers.mapAuthorsToBooks(books);
               done();
             });
         });
@@ -100,7 +101,8 @@ describe('book routes:', function() {
           title: 'Real Python',
           genre: 'Python',
           description: 'A book about Python!',
-          cover_url: 'https://realpython.com/real.png'
+          cover_url: 'https://realpython.com/real.png',
+          authors: ['1']
         })
         .end(function(err, res) {
           res.should.have.status(200);
@@ -109,7 +111,7 @@ describe('book routes:', function() {
             '<h1 class="page-header">Galvanize Reads</h1>');
           queries.getBooks()
             .then(function(books) {
-              allBooks.length.should.equal(books.length);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length);
               done();
             });
         });
@@ -130,7 +132,8 @@ describe('book routes:', function() {
           title: 'Real Python',
           genre: 'Python',
           description: 'A book about Python!',
-          cover_url: 'https://realpython.com/real.png'
+          cover_url: 'https://realpython.com/real.png',
+          authors: ['1']
         })
         .end(function(err, res) {
           res.should.have.status(200);
@@ -139,7 +142,7 @@ describe('book routes:', function() {
             '<h1 class="page-header">Galvanize Reads</h1>');
           queries.getBooks()
             .then(function(books) {
-              books.length.should.equal(allBooks.length);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length);
               done();
             });
         });
@@ -160,7 +163,8 @@ describe('book routes:', function() {
           title: 'Real Python',
           genre: 'Python',
           description: 'A book about Python!',
-          cover_url: 'https://realpython.com/real.png'
+          cover_url: 'https://realpython.com/real.png',
+          authors: ['1']
         })
         .end(function(err, res) {
           res.should.have.status(200);
@@ -170,7 +174,7 @@ describe('book routes:', function() {
           );
           queries.getBooks()
             .then(function(books) {
-              books.length.should.equal(allBooks.length+1);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length+1);
               done();
             });
         });
@@ -197,7 +201,7 @@ describe('book routes:', function() {
           queries.getBooks()
             .then(function(books) {
               books[0].title.should.equal('Python In A Nutshell');
-              allBooks.length.should.equal(books.length);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length);
               done();
             });
         });
@@ -228,7 +232,7 @@ describe('book routes:', function() {
           queries.getBooks()
             .then(function(books) {
               books[0].title.should.equal('Python In A Nutshell');
-              books.length.should.equal(allBooks.length);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length);
               done();
             });
         });
@@ -260,7 +264,7 @@ describe('book routes:', function() {
           queries.getBooks()
             .then(function(books) {
               books[0].title.should.equal('Real Python');
-              books.length.should.equal(allBooks.length);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length);
               done();
             });
         });
@@ -280,7 +284,7 @@ describe('book routes:', function() {
             '<h1 class="page-header">Galvanize Reads</h1>');
           queries.getBooks()
             .then(function(books) {
-              allBooks.length.should.equal(books.length);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length);
               done();
             });
         });
@@ -304,7 +308,7 @@ describe('book routes:', function() {
             '<h1 class="page-header">Galvanize Reads</h1>');
           queries.getBooks()
             .then(function(books) {
-              allBooks.length.should.equal(books.length);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length);
               done();
             });
         });
@@ -327,7 +331,7 @@ describe('book routes:', function() {
           res.text.should.have.string('{"status":"success"}');
           queries.getBooks()
             .then(function(books) {
-              books.length.should.equal(allBooks.length-1);
+              databaseHelpers.mapAuthorsToBooks(books).length.should.equal(allBooks.length-1);
               done();
             });
         });

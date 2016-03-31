@@ -8,9 +8,17 @@ var routeHelpers = require('./helpers');
 
 
 router.get('/new', authHelpers.ensureAdmin, function(req, res, next) {
-  res.render('./books/add-book', {
-    user: req.user,
-    messages: req.flash('messages')
+  queries.getAuthors()
+  .then(function(results) {
+    var authors = databaseHelpers.mapBooksToAuthors(results);
+    res.render('./books/add-book', {
+      authors: authors,
+      user: req.user,
+      messages: req.flash('messages')
+    });
+  })
+  .catch(function(err) {
+    return next(err);
   });
 });
 
@@ -42,7 +50,6 @@ router.get('/', function(req, res, next) {
     var totalBooks = books.length;
     var genres = databaseHelpers.filterData(books, 'genre');
     var groupedBooks = routeHelpers.createChunks(books);
-    console.log(groupedBooks[0][0])
     var pageCount = Math.ceil(totalBooks / 10);
     res.render('./books/all-books', {
       user: req.user,

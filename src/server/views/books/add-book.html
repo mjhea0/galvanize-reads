@@ -26,6 +26,13 @@
         <div class="form-group">
           <textarea class="form-control" name="description" rows="5" placeholder="Description" required></textarea>
         </div>
+        <div class="form-group">
+          <select multiple="" class="form-control" name="authors" required>
+            {% for author in authors %}
+              <option value="{{ author.id }}" {% if authors.indexOf(author.id) != -1 %} selected {% endif %}>{{ author.first_name }}&nbsp;{{ author.last_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Add Book</button>
       </form>

@@ -16,8 +16,35 @@ function getSingleBook(bookID) {
 }
 
 function addBook(obj) {
+  if (!Array.isArray(obj.authors)) {
+    obj.authors = [obj.authors];
+  }
   return knex('books')
-    .insert(obj);
+    .insert({
+      title: obj.title,
+      genre: obj.genre,
+      description: obj.description,
+      cover_url: obj.cover_url
+    }).returning('id')
+    .then(function(bookID) {
+      var authorIds = obj.authors;
+      var authorPromises = authorIds.map(function(id) {
+        return knex('authors')
+          .where('id', id)
+          .returning('id');
+      });
+      return Promise.all(authorPromises)
+        .then(function(ids) {
+          var bookObject = ids.map(function(id) {
+            return {
+              book_id: bookID[0],
+              author_id: id[0].id
+            };
+          });
+          return knex('books_authors')
+            .insert(bookObject);
+        });
+    });
 }
 
 function updateBook(bookID, obj) {
